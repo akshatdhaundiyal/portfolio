@@ -89,23 +89,17 @@ export default function StudioNavbar({
     },
   ];
 
-  const PORTAL_ITEMS = [
-    {
-      label: "Clients Hub",
-      href: "/admin/clients",
-      icon: Users,
-      count: badgeCounts?.clients,
-      match: currentPath.startsWith("/admin/clients"),
-      badge: "Accounts",
-    },
-    {
-      label: "Invoices & Billing",
-      href: "/admin/invoices",
-      icon: Receipt,
-      count: badgeCounts?.invoices,
-      match: currentPath.startsWith("/admin/invoices"),
-      badge: "FinOps",
-    },
+  const platformUrl = process.env.NEXT_PUBLIC_PLATFORM_URL || "https://platform.akshatdhaundiyal.com";
+
+  const PORTAL_ITEMS: Array<{
+    label: string;
+    href: string;
+    icon: any;
+    count?: number;
+    pulse?: boolean;
+    match: boolean;
+    badge?: string;
+  }> = [
     {
       label: "Dev Telemetry",
       href: "/admin/dev",
@@ -120,6 +114,13 @@ export default function StudioNavbar({
       icon: Sparkles,
       match: currentPath.startsWith("/admin/chalk-lab"),
       badge: "Graphics",
+    },
+    {
+      label: "Client CRM ↗",
+      href: `${platformUrl}/admin/clients`,
+      icon: Users,
+      match: false,
+      badge: "Platform",
     },
   ];
 
@@ -329,3 +330,5 @@ export default function StudioNavbar({
     </>
   );
 }
+
+

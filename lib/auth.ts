@@ -161,14 +161,15 @@ export function getRedirectPathForRole(role: UserRole): string {
     case "admin":
       return "/admin/projects?tab=projects";
     case "dev":
-      return "/admin/projects?tab=dev";
+      return "/admin/dev";
     case "user":
-      return "/admin/projects?tab=projects&role=preview";
+      return "/";
     case "guest":
-      return "/admin/projects?tab=projects&role=preview";
+      return "/";
     default:
-      return "/admin/projects";
+      return "/";
   }
 }
 
 export const AUTH_COOKIE_NAME = COOKIE_NAME;
+

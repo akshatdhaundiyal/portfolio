@@ -1,6 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import JourneyTimeline from "@/components/JourneyTimeline";
-import { ArrowUpRight, Award, BookOpen, CheckCircle2, Compass, Cpu, GraduationCap, Layers, Sparkles, Terminal } from "lucide-react";
+import { ArrowUpRight, Award, BookOpen, CheckCircle2, Compass, Cpu, FileText, GraduationCap, Layers, Sparkles, Terminal } from "lucide-react";
 
 export const metadata = {
   title: "Journey & Strategy | Akshat Dhaundiyal",
@@ -92,6 +93,33 @@ export default function AboutPage() {
             <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
               Curriculum focused on Tech Product Strategy, Unit Economics, GTM Execution, Market Discovery, and Financial Valuation.
             </p>
+          </div>
+
+          <div className="artifact-card rounded-2xl p-6 space-y-3 border-l-2 border-[#d94e34]">
+            <div className="flex items-center justify-between font-mono text-xs text-neutral-500">
+              <span className="flex items-center gap-1.5 text-[#d94e34]">
+                <FileText className="w-4 h-4" />
+                <span>OFFICIAL DOSSIER</span>
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-[#d94e34]/10 text-[#d94e34] font-bold text-[10px]">
+                PDF EXPORT
+              </span>
+            </div>
+            <div className="text-base font-semibold text-neutral-900 dark:text-white">
+              Executive Curriculum Vitae
+            </div>
+            <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+              Comprehensive single-page overview with quantified impact metrics, verified publications, and printable formatting.
+            </p>
+            <div className="pt-1">
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#d94e34] dark:text-[#f87171] hover:underline"
+              >
+                <span>Open Executive Resume</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

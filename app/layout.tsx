@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Newsreader, Caveat, Patrick_Hand } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import ChalkGritFilter from "@/components/chalk/ChalkGritFilter";
 
 const inter = Inter({
@@ -76,16 +76,19 @@ export default function RootLayout({
       </head>
       <body className="bg-[#f6f4ee] dark:bg-[#121316] text-neutral-900 dark:text-neutral-100 min-h-screen flex flex-col font-sans selection:bg-[#d94e34]/30 selection:text-white antialiased transition-colors duration-200">
         <ThemeProvider>
-          {/* Global Chalk Texture Filter */}
-          <ChalkGritFilter />
+          <div className="relative min-h-screen flex flex-col font-sans selection:bg-[#d94e34]/30 selection:text-white antialiased transition-colors duration-200">
+            {/* Global Chalk Texture Filter */}
+            <ChalkGritFilter />
 
-          {/* Ambient Desk Pattern Background */}
-          <div className="fixed inset-0 bg-desk-pattern opacity-70 pointer-events-none z-0" />
+            {/* Ambient Desk Pattern Background */}
+            <div className="fixed inset-0 bg-desk-pattern opacity-70 pointer-events-none z-0" />
 
-          <div className="relative z-10 flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            {/* Hand-Drawn Craft Navigation & Ticket Footer */}
+            <div className="relative z-10 flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
           </div>
         </ThemeProvider>
       </body>

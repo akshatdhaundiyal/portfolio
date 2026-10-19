@@ -93,9 +93,28 @@ export default function Footer() {
             <Link href="/about" className="hover:text-neutral-900 dark:hover:text-white transition-colors">
               Journey & Strategy
             </Link>
+            <Link href="/resume" className="text-[#d94e34] dark:text-[#f87171] font-semibold hover:underline transition-colors">
+              Resume (CV)
+            </Link>
             <Link href="/blog" className="hover:text-neutral-900 dark:hover:text-white transition-colors">
               Technical Papers
             </Link>
+            <a
+              href={process.env.NEXT_PUBLIC_PLATFORM_URL ? `${process.env.NEXT_PUBLIC_PLATFORM_URL}/portal` : "https://platform.akshatdhaundiyal.com/portal"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline transition-colors"
+            >
+              Client Portal ↗
+            </a>
+            <a
+              href={process.env.NEXT_PUBLIC_PLATFORM_URL ? `${process.env.NEXT_PUBLIC_PLATFORM_URL}/inquiry` : "https://platform.akshatdhaundiyal.com/inquiry"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
+            >
+              Commission Project ↗
+            </a>
             <Link href="/admin/blogs" className="hover:text-neutral-900 dark:hover:text-white transition-colors">
               Studio
             </Link>
@@ -129,3 +148,4 @@ export default function Footer() {
     </footer>
   );
 }
+

@@ -8,6 +8,8 @@ import LoginModal from "@/components/LoginModal";
 import HandDrawnOvalSvg from "@/components/nav/HandDrawnOvalSvg";
 import AboutFlyout from "@/components/nav/AboutFlyout";
 import WorkFlyout from "@/components/nav/WorkFlyout";
+import WritingFlyout from "@/components/nav/WritingFlyout";
+import ResumeFlyout from "@/components/nav/ResumeFlyout";
 import ConnectFlyout from "@/components/nav/ConnectFlyout";
 import LoginFlyout from "@/components/nav/LoginFlyout";
 import ChalkStrikeThrough from "@/components/nav/ChalkStrikeThrough";
@@ -55,6 +57,10 @@ export default function Navbar() {
       ? "work"
       : pathname.startsWith("/about")
       ? "about"
+      : pathname.startsWith("/blog")
+      ? "writing"
+      : pathname.startsWith("/resume")
+      ? "resume"
       : null);
 
   const handleAuthAction = async () => {
@@ -80,7 +86,7 @@ export default function Navbar() {
       onMouseLeave={handleMouseLeave}
     >
       {/* Hand-Drawn Navigation Cluster with Right-Side Horizontal Flyouts */}
-      <nav className="flex items-center gap-10 sm:gap-16 font-chalk text-2xl sm:text-3xl text-neutral-800 dark:text-[#ece5d8] transition-colors">
+      <nav className="flex items-center gap-6 sm:gap-10 md:gap-12 lg:gap-14 font-chalk text-2xl sm:text-3xl text-neutral-800 dark:text-[#ece5d8] transition-colors">
         
         {/* ITEM 0: :) (Smiley with Red Sunburst Rays) */}
         <div
@@ -153,9 +159,49 @@ export default function Navbar() {
           {activeItem === "work" && <WorkFlyout />}
         </div>
 
-        {/* ITEM 3: Connect (with Horizontal Right Flyout: Compact 2x2 Mini-Cluster) */}
+        {/* ITEM 3: Writing (with Horizontal Right Flyout: Open Notebook & Quill) */}
         <div
-          className="relative flex items-center mr-6 sm:mr-8"
+          className="relative flex items-center"
+          onMouseEnter={() => handleMouseEnter("writing")}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link
+            href="/blog"
+            onMouseEnter={() => handleMouseEnter("writing")}
+            onFocus={() => handleMouseEnter("writing")}
+            onBlur={handleMouseLeave}
+            className="relative px-4 py-1 font-normal lowercase tracking-wide transition-colors"
+          >
+            <span>writing</span>
+            {activeItem === "writing" && <HandDrawnOvalSvg />}
+          </Link>
+
+          {activeItem === "writing" && <WritingFlyout />}
+        </div>
+
+        {/* ITEM 4: Resume (with Horizontal Right Flyout: Certificate & PDF Badge) */}
+        <div
+          className="relative flex items-center"
+          onMouseEnter={() => handleMouseEnter("resume")}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link
+            href="/resume"
+            onMouseEnter={() => handleMouseEnter("resume")}
+            onFocus={() => handleMouseEnter("resume")}
+            onBlur={handleMouseLeave}
+            className="relative px-4 py-1 font-normal lowercase tracking-wide transition-colors"
+          >
+            <span>resume</span>
+            {activeItem === "resume" && <HandDrawnOvalSvg />}
+          </Link>
+
+          {activeItem === "resume" && <ResumeFlyout />}
+        </div>
+
+        {/* ITEM 5: Connect (with Horizontal Right Flyout: Compact 2x2 Mini-Cluster) */}
+        <div
+          className="relative flex items-center mr-4 sm:mr-6"
           onMouseEnter={() => handleMouseEnter("connect")}
           onMouseLeave={handleMouseLeave}
         >
