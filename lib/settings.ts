@@ -1,3 +1,5 @@
+import { prisma } from "./prisma";
+
 export interface WorkspaceSettings {
   displayName: string;
   headline: string;
@@ -6,6 +8,9 @@ export interface WorkspaceSettings {
   educationBadge: string;
   contactEmail: string;
   githubUsername: string;
+  linkedinUrl: string;
+  twitterUrl: string;
+  cvDownloadUrl: string;
   githubToken: string;
   mediumToken: string;
   trelloBoardUrl: string;
@@ -25,6 +30,9 @@ let memorySettings: WorkspaceSettings = {
   educationBadge: "MBA Candidate @ High-Leverage AI Systems",
   contactEmail: "akshatdhaundiyal@gmail.com",
   githubUsername: "akshatdhaundiyal",
+  linkedinUrl: "https://linkedin.com/in/akshatdhaundiyal",
+  twitterUrl: "https://twitter.com/akshatdhaundiyal",
+  cvDownloadUrl: "/resume",
   githubToken: "ghp_mock_live_telemetry_token_99182",
   mediumToken: "",
   trelloBoardUrl: "https://trello.com/b/akshat-studio-production",
@@ -37,6 +45,16 @@ let memorySettings: WorkspaceSettings = {
 };
 
 export async function getWorkspaceSettings(): Promise<WorkspaceSettings> {
+  try {
+    const record = await prisma.setting.findUnique({
+      where: { key: "workspace_settings" },
+    });
+    if (record?.value) {
+      return { ...memorySettings, ...JSON.parse(record.value) };
+    }
+  } catch {
+    // Retain memory fallback if DB is not reachable
+  }
   return memorySettings;
 }
 
@@ -46,5 +64,17 @@ export async function updateWorkspaceSettings(updates: Partial<WorkspaceSettings
     ...updates,
     lastUpdated: new Date().toISOString().split("T")[0],
   };
+
+  try {
+    await prisma.setting.upsert({
+      where: { key: "workspace_settings" },
+      update: { value: JSON.stringify(memorySettings) },
+      create: { key: "workspace_settings", value: JSON.stringify(memorySettings) },
+    });
+  } catch {
+    // Retain in memory
+  }
+
   return memorySettings;
 }
+

@@ -3,7 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { BlogPost } from "@/lib/blogs";
-import { ArrowUpRight, Clock, Tag } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
+import ChalkCard from "@/components/chalk/ChalkCard";
+import ChalkButton from "@/components/chalk/ChalkButton";
 
 interface Props {
   blog: BlogPost;
@@ -11,50 +13,65 @@ interface Props {
 
 export default function BlogCard({ blog }: Props) {
   return (
-    <article className="artifact-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between space-y-5 hover:border-indigo-500/30 transition-all group">
-      <div className="space-y-3">
+    <ChalkCard
+      variant="slate"
+      accentColor={blog.accentColor || "#6366f1"}
+      cornerTicks
+      interactive
+      className="flex flex-col justify-between"
+    >
+      <div className="p-6 sm:p-7 space-y-4">
         {/* Top Metadata */}
         <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
-          <span className="px-2.5 py-0.5 rounded bg-indigo-500/10 dark:bg-white/[0.04] border border-indigo-500/20 dark:border-white/[0.08] text-indigo-600 dark:text-indigo-300 font-medium">
+          <span
+            className="px-2.5 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider"
+            style={{
+              backgroundColor: `${blog.accentColor || "#6366f1"}18`,
+              color: blog.accentColor || "#6366f1",
+            }}
+          >
             {blog.category}
           </span>
-          <div className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400">
+          <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
             <Clock className="w-3.5 h-3.5" />
             <span>{blog.readTime}</span>
           </div>
         </div>
 
         {/* Title */}
-        <Link href={`/blog/${blog.slug}`} className="block">
-          <h3 className="text-xl font-semibold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#d94e34] dark:group-hover:text-cyan-300 transition-colors leading-snug">
+        <Link href={`/blog/${blog.slug}`} className="block group">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#d94e34] dark:group-hover:text-cyan-300 transition-colors leading-snug">
             {blog.title}
           </h3>
         </Link>
 
         {/* Subtitle / Summary */}
-        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed line-clamp-3">
+        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed line-clamp-3 font-sans">
           {blog.summary}
         </p>
-      </div>
 
-      {/* Footer: Tags & Read Link */}
-      <div className="pt-3 border-t border-black/10 dark:border-white/[0.06] flex items-center justify-between gap-3 text-xs">
-        <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-neutral-600 dark:text-neutral-400">
-          {blog.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="tech-tag text-[10px]">
-              #{tag}
-            </span>
-          ))}
+        {/* Footer: Tags & Read Link */}
+        <div className="pt-4 border-t border-black/10 dark:border-white/[0.06] flex items-center justify-between gap-3 text-xs">
+          <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-neutral-600 dark:text-neutral-400">
+            {blog.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.06] text-[10px]"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+
+          <ChalkButton
+            href={`/blog/${blog.slug}`}
+            variant="ghost"
+            icon={<ArrowUpRight className="w-3.5 h-3.5" />}
+          >
+            Read Paper
+          </ChalkButton>
         </div>
-
-        <Link
-          href={`/blog/${blog.slug}`}
-          className="inline-flex items-center gap-1 font-mono text-xs text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors"
-        >
-          <span>Read Paper</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
       </div>
-    </article>
+    </ChalkCard>
   );
 }

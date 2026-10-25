@@ -2,7 +2,7 @@ import React from "react";
 
 export default function WritingFlyout() {
   return (
-    <div className="absolute left-full ml-2.5 top-1/2 -translate-y-1/2 pointer-events-none z-40 animate-doodle-flyout-right flex items-center gap-1.5 whitespace-nowrap">
+    <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 pointer-events-none z-40 flex flex-col items-center whitespace-nowrap transition-all duration-150">
       <div className="relative flex items-center">
         {/* Hand-Drawn Open Notebook / Dispatch Doodle */}
         <svg

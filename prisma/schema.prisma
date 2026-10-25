@@ -58,11 +58,34 @@ model Project {
   featured         Boolean   @default(true)
   githubUrl        String?
   liveUrl          String?
+  videoUrl         String?
+  posterUrl        String?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 
   @@index([slug])
   @@index([section])
+  @@index([displayOrder])
+  @@index([featured])
+}
+
+model Experience {
+  id           String    @id @default(cuid())
+  company      String
+  role         String
+  location     String?
+  period       String
+  startDate    DateTime?
+  endDate      DateTime?
+  current      Boolean   @default(false)
+  description  String?   @db.Text
+  highlights   String[]
+  skills       String[]
+  displayOrder Int       @default(0)
+  featured     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
   @@index([displayOrder])
   @@index([featured])
 }
@@ -87,3 +110,28 @@ model User {
   @@index([username])
   @@index([role])
 }
+
+model Order {
+  id               String   @id @default(cuid())
+  orderId          String   @unique
+  paymentId        String?  @unique
+  productSlug      String
+  productName      String
+  amount           Int
+  currency         String   @default("INR")
+  status           String   @default("created")
+  customerName     String?
+  customerEmail    String?
+  customerPhone    String?
+  fulfillmentToken String?
+  receipt          String?
+  notes            Json?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([status])
+  @@index([productSlug])
+  @@index([customerEmail])
+}
+

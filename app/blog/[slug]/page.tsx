@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogBySlug } from "@/lib/blogs";
 import BlogContentRenderer from "@/components/BlogContentRenderer";
-import { ArrowLeft, ArrowUpRight, Clock, Share2, Sparkles, Tag } from "lucide-react";
+import ChalkCard from "@/components/chalk/ChalkCard";
+import ChalkButton from "@/components/chalk/ChalkButton";
+import { ArrowLeft, ArrowUpRight, Clock, FileText, Github, Layers, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 
 interface Props {
@@ -83,12 +85,12 @@ export default async function BlogPostPage({ params }: Props) {
           <span className="text-neutral-600 dark:text-neutral-400">By Akshat Dhaundiyal</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-white leading-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
           {blog.title}
         </h1>
 
         {blog.subtitle && (
-          <p className="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300 font-normal leading-relaxed border-l-2 border-indigo-500 pl-4 py-1">
+          <p className="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300 font-normal leading-relaxed border-l-2 border-[#d94e34] pl-4 py-1 font-serif italic">
             {blog.subtitle}
           </p>
         )}
@@ -96,7 +98,10 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 pt-2">
           {blog.tags.map((tag) => (
-            <span key={tag} className="tech-tag text-xs">
+            <span
+              key={tag}
+              className="font-mono text-xs px-2.5 py-0.5 rounded bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.08] text-neutral-600 dark:text-neutral-400"
+            >
               #{tag}
             </span>
           ))}
@@ -116,26 +121,53 @@ export default async function BlogPostPage({ params }: Props) {
         <BlogContentRenderer content={blog.content} />
       </div>
 
-      {/* Footer Author Card */}
-      <div className="border-t border-black/10 dark:border-white/[0.08] pt-8 mt-16 artifact-card rounded-2xl p-6 sm:p-8 space-y-4">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center font-mono font-bold text-white text-base shadow-lg shadow-indigo-500/20">
-            AD
+      {/* Next-Step Action Strip & Author Card */}
+      <ChalkCard variant="slate" cornerTicks accentColor="#d94e34" className="mt-16">
+        <div className="p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/10 dark:border-white/[0.08] pb-4">
+            <div className="flex items-center gap-4">
+              <span className="traditional-seal text-sm font-bold">AD</span>
+              <div>
+                <h4 className="font-serif font-bold text-neutral-900 dark:text-white text-base">
+                  Akshat Dhaundiyal
+                </h4>
+                <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  Data Scientist · MBA Candidate · AI PM &amp; Systems Architect
+                </p>
+              </div>
+            </div>
+
+            <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+              ● Open to Strategic AI Roles
+            </span>
           </div>
-          <div>
-            <h4 className="font-semibold text-neutral-900 dark:text-white text-base">Akshat Dhaundiyal</h4>
-            <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
-              Data Scientist · MBA Candidate · AI PM & Systems Architect
-            </p>
+
+          <p className="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
+            Writing on production machine learning architectures, actuarial statistics, cloud inference SLA calibration, and AI product economics.
+          </p>
+
+          {/* Deep-Dive Action CTAs */}
+          <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <ChalkButton href="/work" variant="secondary" icon={<Layers className="w-3.5 h-3.5" />}>
+                Explore Systems &amp; Blueprints
+              </ChalkButton>
+              <ChalkButton href="/resume" variant="primary" icon={<FileText className="w-3.5 h-3.5" />}>
+                Official CV
+              </ChalkButton>
+            </div>
+
+            <ChalkButton
+              href="https://github.com/akshatdhaundiyal"
+              external
+              variant="ghost"
+              icon={<Github className="w-3.5 h-3.5" />}
+            >
+              GitHub Code
+            </ChalkButton>
           </div>
         </div>
-        <p className="text-xs text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Writing about production machine learning architectures, actuarial statistics, cloud inference systems, and product strategy. For questions or discussions, reach out at{" "}
-          <a href="mailto:akshatdhaundiyal@gmail.com" className="text-cyan-700 dark:text-cyan-400 underline">
-            akshatdhaundiyal@gmail.com
-          </a>.
-        </p>
-      </div>
+      </ChalkCard>
     </article>
   );
 }

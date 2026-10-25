@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%">
+  <defs>
+    <filter id="chalk-grit" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+
+  <style>
+    .node-box { fill: #14161f; stroke: #38bdf8; stroke-width: 2.2; rx: 12; filter: url(#chalk-grit); }
+    .node-title { font-family: monospace; font-size: 14px; font-weight: bold; fill: #f3f4f6; }
+    .node-sub { font-family: sans-serif; font-size: 11px; fill: #9ca3af; }
+    .chalk-arrow { stroke: #f59e0b; stroke-width: 2.2; stroke-dasharray: 6 4; fill: none; filter: url(#chalk-grit); }
+    .badge { font-family: monospace; font-size: 10px; fill: #10b981; }
+  </style>
+
+  <!-- Node 1: Ingestion -->
+  <g transform="translate(40, 50)">
+    <rect class="node-box" width="180" height="130" stroke="#f43f5e" />
+    <text x="20" y="35" class="node-title">01 // INGESTION</text>
+    <text x="20" y="65" class="node-sub">Raw Telemetry &amp; Logs</text>
+    <text x="20" y="90" class="node-sub">Schema Contract Triage</text>
+    <text x="20" y="115" class="badge">● VALIDATED</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 230 115 L 290 115" class="chalk-arrow" />
+  <polygon points="295,115 285,110 285,120" fill="#f59e0b" />
+
+  <!-- Node 2: Core ML Engine -->
+  <g transform="translate(310, 50)">
+    <rect class="node-box" width="190" height="130" stroke="#6366f1" />
+    <text x="20" y="35" class="node-title">02 // ML ENGINE</text>
+    <text x="20" y="65" class="node-sub">Actuarial GLM / Quantized</text>
+    <text x="20" y="90" class="node-sub">Sub-85ms Inference</text>
+    <text x="20" y="115" class="badge">+$12M LIFT</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M 510 115 L 570 115" class="chalk-arrow" />
+  <polygon points="575,115 565,110 565,120" fill="#f59e0b" />
+
+  <!-- Node 3: Output & Decision -->
+  <g transform="translate(590, 50)">
+    <rect class="node-box" width="180" height="130" stroke="#10b981" />
+    <text x="20" y="35" class="node-title">03 // DISPATCH</text>
+    <text x="20" y="65" class="node-sub">Field Audit Scheduling</text>
+    <text x="20" y="90" class="node-sub">Real-Time Webhook</text>
+    <text x="20" y="115" class="badge">● SLA PASS</text>
+  </g>
+</svg>

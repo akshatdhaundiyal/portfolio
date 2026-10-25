@@ -60,6 +60,7 @@ pnpm-debug.log*
 *.sw?
 
 # Misc & Notebooks
+*.tsbuildinfo
 test_notebook.ipynb
 .ipynb_checkpoints/
 .turbo/

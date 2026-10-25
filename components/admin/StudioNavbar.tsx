@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   Layers,
   FileText,
+  Briefcase,
   Users,
   Receipt,
   Settings,
@@ -72,6 +73,13 @@ export default function StudioNavbar({
       count: badgeCounts?.projects,
       match: currentPath.startsWith("/admin/projects"),
       badge: "Showcase",
+    },
+    {
+      label: "Experience & Roles",
+      href: "/admin/experience",
+      icon: Briefcase,
+      match: currentPath.startsWith("/admin/experience"),
+      badge: "Resume",
     },
     {
       label: "Articles Studio",

@@ -9,7 +9,7 @@ interface LoginFlyoutProps {
 export default function LoginFlyout({ user, onMouseEnter, onClick }: LoginFlyoutProps) {
   return (
     <div
-      className="absolute left-full ml-3 top-1/2 -translate-y-1/2 pointer-events-auto z-40 animate-doodle-flyout-right flex items-center gap-1.5 whitespace-nowrap"
+      className="absolute top-full mt-2.5 left-1/2 -translate-x-1/2 pointer-events-auto z-40 flex items-center gap-1.5 whitespace-nowrap transition-all duration-150"
       onMouseEnter={onMouseEnter}
     >
       <button

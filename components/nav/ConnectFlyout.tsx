@@ -7,10 +7,10 @@ interface ConnectFlyoutProps {
 export default function ConnectFlyout({ onMouseEnter }: ConnectFlyoutProps) {
   return (
     <div
-      className="absolute left-full ml-3 top-1/2 -translate-y-1/2 pointer-events-auto z-40 animate-doodle-flyout-right flex items-center p-2 rounded-xl bg-white/95 dark:bg-[#18191e]/95 border border-[#1a1a1a]/15 dark:border-white/15 shadow-xl backdrop-blur-md"
+      className="absolute top-full mt-2.5 left-1/2 -translate-x-1/2 pointer-events-auto z-40 flex items-center p-1.5 rounded-xl bg-white/95 dark:bg-[#18191e]/95 border border-[#1a1a1a]/15 dark:border-white/15 shadow-xl backdrop-blur-md transition-all duration-150"
       onMouseEnter={onMouseEnter}
     >
-      <div className="grid grid-cols-2 gap-2 w-[72px]">
+      <div className="flex items-center gap-1.5">
         {/* GitHub Cat */}
         <a
           href="https://github.com/akshatdhaundiyal"

@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { Sparkles, CheckSquare, Square } from "lucide-react";
 import ChalkAnnotation from "@/components/chalk/ChalkAnnotation";
-import ChalkArrow from "@/components/chalk/ChalkArrow";
 import ChalkBadge from "@/components/chalk/ChalkBadge";
+import ChalkArrow from "@/components/chalk/ChalkArrow";
 
 const rotatingAdjectives = [
   "auditable",
@@ -62,28 +60,11 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-  // Interactive Checklist State
-  const [checklist, setChecklist] = useState([
-    { id: 1, text: "High-ROI enterprise machine learning (+$12M annual premium lift)", checked: true },
-    { id: 2, text: "Direct commercial unit economics & cloud inference cost modeling", checked: true },
-    { id: 3, text: "Mathematically transparent GLMs over black-box vanity complexity", checked: true },
-    { id: 4, text: "On-device privacy & local-first zero-cloud edge architectures", checked: true },
-  ]);
-
-  const toggleChecklist = (id: number) => {
-    setChecklist((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
-    );
-  };
-
   return (
-    <section className="relative pt-6 sm:pt-10 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <section className="relative pt-6 sm:pt-10 pb-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       
-      {/* =========================================================================
-          1. Prominent Dynamic Greeting: "Hi, I am Akshat Dhaundiyal."
-          ========================================================================= */}
-      <div className="text-center pb-10 sm:pb-14 space-y-4 select-none">
-        {/* Main Animated Greeting */}
+      {/* 1. Dynamic Greeting */}
+      <div className="text-center pb-8 sm:pb-12 space-y-4 select-none">
         <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-neutral-900 dark:text-white leading-[1.15]">
           <span>Hi, I am </span>
           <span className="relative inline-block group cursor-pointer">
@@ -131,16 +112,13 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Elegant Visual Transition to Pushed-Down Section */}
-      <div className="w-full flex items-center justify-center pb-10 sm:pb-12">
+      {/* Visual Separator */}
+      <div className="w-full flex items-center justify-center pb-8 sm:pb-10">
         <div className="w-24 h-px bg-black/10 dark:bg-white/10" />
       </div>
 
-      {/* =========================================================================
-          2. Pushed-Down Core Hero Metaphor (Jackie Zhang / Jackie Hu style)
-          ========================================================================= */}
+      {/* 2. Thesis Statement & Availability Badges */}
       <div className="text-center space-y-6">
-        {/* Location, Timezone & Chalk Badges */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.08] text-xs font-mono text-neutral-800 dark:text-neutral-300 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -156,7 +134,7 @@ export default function HeroSection() {
           </ChalkBadge>
         </div>
 
-        {/* High-Contrast Editorial Sentence-Case Title with Animated Chalk Circle on Rotating Adjective */}
+        {/* High-Contrast Editorial Sentence with Animated Chalk Circle on Rotating Adjective */}
         <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl tracking-tight text-neutral-900 dark:text-white leading-[1.25]">
           Software &amp; AI systems should be{" "}
           <span className="inline-block min-w-[210px] sm:min-w-[280px]">
@@ -176,75 +154,15 @@ export default function HeroSection() {
           </span>
         </h2>
 
-        {/* Craft Definition (Jackie Hu "Verb & Noun" inspiration) */}
-        <div className="max-w-2xl mx-auto text-neutral-700 dark:text-neutral-300 font-sans text-sm sm:text-base leading-relaxed space-y-3">
-          <p className="italic font-serif text-neutral-600 dark:text-neutral-400 text-base sm:text-lg">
-            &ldquo;AI Systems &amp; Product Strategy (Verb &amp; Noun): a disciplined craft where mathematical rigor meets unit economics, operational adoption, and auditable business outcomes.&rdquo;
-          </p>
-          <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm">
-            I bridge machine learning engineering with commercial product leadership. Former Lead Analytics Architect at EXL Service (recovered{" "}
-            <ChalkAnnotation type="circle" color="#10b981" trigger="inView" strokeWidth={2.2} padding={5}>
-              <strong className="text-emerald-700 dark:text-emerald-400 font-mono font-bold">+$12M</strong>
-            </ChalkAnnotation>{" "}
-            in commercial insurance audit exposure) currently pursuing an MBA to lead high-leverage AI products.
-          </p>
-        </div>
+        {/* 1-Sentence High-Impact Value Proposition */}
+        <p className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-300 font-sans text-sm sm:text-base leading-relaxed">
+          Designing and deploying auditable machine learning systems where mathematical rigor meets commercial unit economics, operational adoption, and verifiable business ROI.
+        </p>
 
-        {/* Hand-Drawn Chalk Arrow pointing to Principles */}
-        <div className="flex justify-center pt-2 -mb-4">
-          <ChalkArrow
-            direction="curve-right-down"
-            color="#f59e0b"
-            label="test operating principles"
-            trigger="inView"
-            width={72}
-            height={36}
-          />
-        </div>
-
-        {/* Interactive Operating Checklist on Taped Index Card */}
-        <div className="relative mt-6 text-left bg-graph-paper rounded-xl p-5 sm:p-6 border border-[#e2d9cc] text-neutral-900 shadow-xl max-w-2xl mx-auto">
-          <div className="washi-tape -top-2.5 left-8 rotate-[-2deg]" />
-
-          <div className="flex items-center justify-between border-b border-neutral-300 pb-2.5 mb-3">
-            <span className="font-mono text-[10px] font-bold tracking-widest uppercase text-neutral-500 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#d94e34]" />
-              <span>Core Operating Principles (Interactive)</span>
-            </span>
-            <span className="font-handwritten text-sm text-[#d94e34] font-bold">
-              click to test!
-            </span>
-          </div>
-
-          <div className="space-y-2">
-            {checklist.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => toggleChecklist(item.id)}
-                className={`w-full text-left p-2 rounded text-xs font-mono flex items-start gap-2.5 transition-all cursor-pointer ${
-                  item.checked
-                    ? "bg-white/80 border border-neutral-200 text-neutral-900"
-                    : "bg-black/5 text-neutral-400"
-                }`}
-              >
-                {item.checked ? (
-                  <CheckSquare className="w-4 h-4 text-[#d94e34] shrink-0 mt-0.5" />
-                ) : (
-                  <Square className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
-                )}
-                <span className="leading-snug">
-                  {item.checked ? (
-                    item.text
-                  ) : (
-                    <ChalkAnnotation type="strike" color="#ef4444" trigger="mount" strokeWidth={2.4}>
-                      {item.text}
-                    </ChalkAnnotation>
-                  )}
-                </span>
-              </button>
-            ))}
-          </div>
+        {/* Subtle Indicator to Explore Work */}
+        <div className="pt-4 flex flex-col items-center justify-center text-xs font-mono text-neutral-500 dark:text-neutral-400 gap-1.5 select-none">
+          <span className="font-handwritten text-base text-[#d94e34]">explore flagship architectures below</span>
+          <span className="text-[#d94e34] animate-bounce">↓</span>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Sparkles, Terminal, Github, ArrowUpRight, Cpu } from "lucide-react";
 import type { ProjectItem } from "@/lib/data/projects";
+import MediaChronicleBlueprint from "@/components/chalk/diagrams/MediaChronicleBlueprint";
 
 interface CurrentlyCookingCardProps {
   project?: ProjectItem;
@@ -75,6 +76,9 @@ export default function CurrentlyCookingCard({ project }: CurrentlyCookingCardPr
               <strong className="text-neutral-900 dark:text-white font-semibold">Media Chronicle</strong> executes neural face recognition and semantic embedding search directly on consumer CPU/GPU hardware.
             </p>
           </div>
+
+          {/* Interactive Chalkboard Blueprint */}
+          <MediaChronicleBlueprint />
 
           {/* Active Work In Progress Callout */}
           <div className="bg-[#f9f7f2] dark:bg-[#121316] rounded-xl border border-black/10 dark:border-white/[0.06] p-4 flex items-start gap-3 text-xs font-mono text-neutral-800 dark:text-neutral-300">

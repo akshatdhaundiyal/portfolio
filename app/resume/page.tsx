@@ -17,6 +17,8 @@ import {
   BookOpen,
 } from "lucide-react";
 import PrintResumeButton from "@/components/resume/PrintResumeButton";
+import { getAllExperiences } from "@/lib/experience";
+import { getWorkspaceSettings } from "@/lib/settings";
 
 export const metadata = {
   title: "Executive Resume | Akshat Dhaundiyal",
@@ -24,7 +26,10 @@ export const metadata = {
     "Curriculum Vitae of Akshat Dhaundiyal: Lead Data Scientist, MBA Candidate, Applied ML Engineer, and AI Product Strategist.",
 };
 
-export default function ResumePage() {
+export default async function ResumePage() {
+  const experiences = await getAllExperiences();
+  const settings = await getWorkspaceSettings();
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 print:py-0 print:px-0 print:max-w-none text-neutral-900 dark:text-[#ece5d8]">
       
@@ -48,51 +53,51 @@ export default function ResumePage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <div>
               <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white">
-                Akshat Dhaundiyal
+                {settings.displayName || "Akshat Dhaundiyal"}
               </h1>
               <p className="text-base sm:text-lg font-mono text-[#d94e34] dark:text-[#f87171] mt-1 font-medium">
-                AI Product Management (Technical / AI PM) · Senior Applied ML Engineering
+                {settings.headline || "AI Product Management (Technical / AI PM) · Senior Applied ML Engineering"}
               </p>
             </div>
 
             <div className="font-mono text-xs text-neutral-500 dark:text-neutral-400 flex items-center gap-1.5 sm:text-right">
               <MapPin className="w-3.5 h-3.5 text-neutral-400" />
-              <span>India · Open to Global / Relocation</span>
+              <span>{settings.locationPill || "India · Open to Global / Relocation"}</span>
             </div>
           </div>
 
           {/* Contact Metadata Bar */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-neutral-600 dark:text-neutral-400 pt-2">
             <a
-              href="mailto:akshatdhaundiyal@gmail.com"
+              href={`mailto:${settings.contactEmail || "akshatdhaundiyal@gmail.com"}`}
               className="flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-[#d94e34]" />
-              <span>akshatdhaundiyal@gmail.com</span>
+              <span>{settings.contactEmail || "akshatdhaundiyal@gmail.com"}</span>
             </a>
             <a
-              href="https://linkedin.com/in/akshatdhaundiyal"
+              href={settings.linkedinUrl || "https://linkedin.com/in/akshatdhaundiyal"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <Linkedin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              <span>linkedin.com/in/akshatdhaundiyal</span>
+              <span>LinkedIn</span>
             </a>
             <a
-              href="https://github.com/akshatdhaundiyal"
+              href={`https://github.com/${settings.githubUsername || "akshatdhaundiyal"}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <Github className="w-3.5 h-3.5" />
-              <span>github.com/akshatdhaundiyal</span>
+              <span>GitHub</span>
             </a>
           </div>
 
           {/* Executive Summary */}
           <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 pt-2 font-sans">
-            Data Scientist pursuing an MBA, blending <strong>Digital Signal Processing (DSP)</strong> mathematical rigor with <strong>commercial unit economics</strong>. Battle-tested delivering <strong>+$12M</strong> in premium adjustments with compound actuarial GLMs at EXL Service and orchestrating cloud/edge AI systems on Google Vertex AI. Positioned for high-leverage roles leading Technical AI Product Management and Applied ML Engineering.
+            {settings.bio || "Data Scientist pursuing an MBA, blending Digital Signal Processing (DSP) mathematical rigor with commercial unit economics. Battle-tested delivering +$12M in premium adjustments with compound actuarial GLMs at EXL Service and orchestrating cloud/edge AI systems on Google Vertex AI. Positioned for high-leverage roles leading Technical AI Product Management and Applied ML Engineering."}
           </p>
 
           {/* Quick Metrics Bar */}
@@ -120,83 +125,29 @@ export default function ResumePage() {
           </div>
 
           <div className="space-y-8">
-            {/* Experience Item 1: EXL Service */}
-            <div className="space-y-2.5">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
-                    Lead Data Scientist & Analytics Architect
-                  </h3>
-                  <div className="font-mono text-xs text-[#d94e34] font-medium">
-                    EXL Service · Insurance & Actuarial AI Practice
+            {experiences.map((exp) => (
+              <div key={exp.id} className="space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
+                      {exp.role}
+                    </h3>
+                    <div className="font-mono text-xs text-[#d94e34] font-medium">
+                      {exp.company}
+                    </div>
                   </div>
+                  <div className="font-mono text-xs text-neutral-500">{exp.period}</div>
                 </div>
-                <div className="font-mono text-xs text-neutral-500">2023 — Present</div>
+
+                <ul className="list-disc list-outside pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
+                  {exp.highlights.map((highlight, idx) => (
+                    <li key={idx}>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <ul className="list-disc list-outside pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
-                <li>
-                  Architected and deployed enterprise compound Generalized Linear Models (Poisson frequency × Gamma severity) for commercial property casualty underwriting, unlocking <strong>+$12M in annual premium adjustments</strong>.
-                </li>
-                <li>
-                  Engineered automated NLP triage pipeline on <strong>Google Vertex AI</strong> utilizing fine-tuned transformer architectures to extract unstructured claimant injury severity, reducing triage cycle duration by <strong>70%</strong>.
-                </li>
-                <li>
-                  Authored end-to-end model governance whitepapers complying with strict US state regulatory filing standards, ensuring zero black-box bias and full statistical auditability.
-                </li>
-                <li>
-                  Directed cross-functional sprints across actuaries, software engineers, and underwriting executives to align algorithmic output with commercial loss-ratio targets.
-                </li>
-              </ul>
-            </div>
-
-            {/* Experience Item 2: Media Chronicle & Edge Vision Appliance */}
-            <div className="space-y-2.5">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
-                    Applied AI Systems Architect (Founding Engineer)
-                  </h3>
-                  <div className="font-mono text-xs text-cyan-600 dark:text-cyan-400 font-medium">
-                    Media Chronicle · Privacy-First Edge Vision
-                  </div>
-                </div>
-                <div className="font-mono text-xs text-neutral-500">2024</div>
-              </div>
-
-              <ul className="list-disc list-outside pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
-                <li>
-                  Built an autonomous local-first biometric indexing system utilizing <strong>YOLOv8</strong> and quantized on-device embeddings, delivering <strong>sub-100ms real-time recognition</strong> with zero cloud egress cost.
-                </li>
-                <li>
-                  Formulated privacy-preserving local edge caching layer eliminating vendor lock-in and minimizing consumer hardware overhead.
-                </li>
-              </ul>
-            </div>
-
-            {/* Experience Item 3: WashQueue IoT Platform */}
-            <div className="space-y-2.5">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
-                    Full-Stack Systems Engineer
-                  </h3>
-                  <div className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    WashQueue Smart Appliance & Platform
-                  </div>
-                </div>
-                <div className="font-mono text-xs text-neutral-500">2024</div>
-              </div>
-
-              <ul className="list-disc list-outside pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
-                <li>
-                  Implemented low-latency telemetry streaming using <strong>FastAPI, WebSockets, and Redis</strong> for real-time appliance state synchronization across 500+ simulated nodes.
-                </li>
-                <li>
-                  Engineered containerized deployment topology with Docker and automated CI/CD GitHub Actions pipelines.
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </section>
 
